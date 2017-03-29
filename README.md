@@ -19,7 +19,7 @@ To prevent time wasting I just switched to ordinary *Centos7* where I did not no
 
 ## Knowledge
 
-Lot of it was written based on my life experience but there were some elements which I could not handle easily. Below topics were very helpful!
+Below topics were very helpful!
 
 * [Installing pyspatialite](http://blog.oddbit.com/2015/11/17/installing-pyspatialite-on-fedora/)
 * [virtualenv - User Guide](https://virtualenv.pypa.io/en/stable/userguide/)
@@ -62,7 +62,8 @@ To create a postgresql database and a user just use `DB_NAME`, `DB_USER` and `DB
 Type below to create a DB_USER=gooduser, DB_PASS=passwd and DB_NAME=foo:
 
 ```
-docker create -it -p 5432:5432 --name featureserver96 --env 'DB_USER=gooduser' --env 'DB_PASS=passwd' --env 'DB_NAME=foo' khdevel/featureserver:0.1```
+docker create -it -p 5432:5432 --name featureserver96 --env 'DB_USER=gooduser' --env 'DB_PASS=passwd' --env 'DB_NAME=foo' khdevel/featureserver:0.1
+```
 
 **Connection**
 
