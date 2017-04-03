@@ -1,5 +1,5 @@
 #
-# postgresql + postgis2 + featureserver Dockerfile on CentOS 7
+# postgresql + postgis2 on CentOS 7
 #
 # Pull base image
 FROM centos:latest
@@ -10,7 +10,7 @@ ENV PGVERSION 96
 
 # Set the environment variables
 ENV HOME /var/lib/pgsql
-ENV PGDATA /var/lib/pgsql/9.6/data
+ENV PGDATA /var/lib/pgsql/$PG_VERSION/data
 
 # Install postgresql and the latest EPEL repository
 RUN rpm -vih https://download.postgresql.org/pub/repos/yum/$PG_VERSION/redhat/rhel-7-x86_64/pgdg-centos$PGVERSION-$PG_VERSION-3.noarch.rpm && \
@@ -18,7 +18,8 @@ RUN rpm -vih https://download.postgresql.org/pub/repos/yum/$PG_VERSION/redhat/rh
     yum update -y
 
 # Install core packages
-RUN yum install -y sudo \
+RUN yum install -y \
+    sudo \
     pwgen \
     gcc \
     python-devel \
@@ -34,23 +35,6 @@ RUN yum install -y sudo \
     postgresql$PGVERSION-server \
     postgresql$PGVERSION-contrib && \
     yum clean all
-
-# Install the virtualenv
-RUN sudo -H pip install virtualenv
-
-# Change the WORKDIR
-WORKDIR /opt
-
-# Install featureserver from virtualenv
-RUN virtualenv featureserver
-WORKDIR /opt/featureserver
-RUN sudo -H ./bin/pip install \
-    dxfwrite \
-    lxml \
-    Cheetah \
-    simplejson \
-    psycopg2
-RUN CFLAGS=-I/usr/include ./bin/pip install pyspatialite
 
 # Copy the postgresql-setup
 COPY data/postgresql-setup /usr/pgsql-$PG_VERSION/bin/postgresql$PGVERSION-setup

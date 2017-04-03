@@ -31,54 +31,35 @@ Below topics were very helpful!
 3. Installed *postgis2-96*
 4. Installed *featureserver*
 
-## Run
+## Run with docker-compose
 
-### Setup the postgresql
+Just run like that:
 
-Below description covers the task related to the pgsql setup.
+`docker-compose up`
 
-**Build the image**
+To rebuild it:
 
-Create the image *khdevel/featureserver* by typing below command:
+`docker-compose up --build`
 
-`docker build -t khdevel/featureserver:0.1 .`
+## Check if featureserver works
 
-**Run the postgresql server**
+Featureserver is running in the *standalone* mode. Open the web browser and type:
 
-To run the pgsql as a daemon type below command:
+`http://localhost:8080`
 
-`docker run -d -p 5432:5432 --name featureserver96 khdevel/featureserver:0.1`
-
-**Connect to the pgsql**
-
-`docker exec -it featureserver96 psql`
-
-### Creating a database and username
-
-To create a postgresql database and a user just use `DB_NAME`, `DB_USER` and `DB_PASS` variables.
-
-**Creation**
-
-Type below to create a DB_USER=gooduser, DB_PASS=passwd and DB_NAME=foo:
+You should see in the docker-compose logs:
 
 ```
-docker create -it -p 5432:5432 --name featureserver96 --env 'DB_USER=gooduser' --env 'DB_PASS=passwd' --env 'DB_NAME=foo' khdevel/featureserver:0.1
+featureserver    | 192.168.99.1 - - [03/Apr/2017 16:15:28] "GET /scribble/all.atom HTTP/1.1" 200 660
+featureserver    | 192.168.99.1 - - [03/Apr/2017 16:15:40] "GET / HTTP/1.1" 200 35
 ```
-
-**Connection**
-
-To connect to created database just type:
-
-`docker start featureserver96`
-
-and then...
-
-`docker exec -it featureserver96 psql foo -U gooduser`
 
 ## TODO
 
-1. Create a *docker-compose* file
+1. ~~Create a *docker-compose* file~~
 2. Test of *featureserver* features
+  * ~~Start the featuresrever~~
+  * Connect the featureserver to postgis2
 3. Find a way to run it on *amazonlinux*
 4. Make the image smaller
 5. Refactor scripts in the data/ directory

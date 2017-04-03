@@ -1,0 +1,15 @@
+---
+version: '2'
+services:
+  postgis2:
+    build: ./postgis2
+    container_name: postgis2
+    ports:
+      - "5432:5432"
+  featureserver:
+    build: ./featureserver
+    container_name: featureserver
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgis2
