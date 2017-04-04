@@ -6,6 +6,10 @@ services:
     container_name: postgis2
     ports:
       - "5432:5432"
+    environment:
+      - DB_NAME=foo
+      - DB_USER=bar
+      - DB_PASS=password
   featureserver:
     build: ./featureserver
     container_name: featureserver
