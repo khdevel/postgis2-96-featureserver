@@ -50,8 +50,24 @@ Featureserver is running in the *standalone* mode. Open the web browser and type
 You should see in the docker-compose logs:
 
 ```
-featureserver    | 192.168.99.1 - - [03/Apr/2017 16:15:28] "GET /scribble/all.atom HTTP/1.1" 200 660
-featureserver    | 192.168.99.1 - - [03/Apr/2017 16:15:40] "GET / HTTP/1.1" 200 35
+postgis2         | pg_ctl: another server might be running; trying to start server anyway
+postgis2         | waiting for server to start....< 2017-04-04 15:12:17.672 UTC >LOG:  redirecting log output to logging collector process
+postgis2         | < 2017-04-04 15:12:17.672 UTC >HINT:  Future log output will appear in directory "pg_log".
+postgis2         |  done
+postgis2         | server started
+postgis2         | Creating user "bar"...
+postgis2         | CREATE ROLE
+postgis2         | Creating database "foo"...
+postgis2         | CREATE DATABASE foo;
+postgis2         | CREATE DATABASE
+postgis2         | Granting access to database "foo" for user "bar"...
+postgis2         | GRANT
+postgis2         | waiting for server to shut down.... done
+postgis2         | server stopped
+postgis2         | Starting PostgreSQL 9.6 server...
+postgis2         | < 2017-04-04 15:12:20.517 UTC >LOG:  redirecting log output to logging collector process
+postgis2         | < 2017-04-04 15:12:20.517 UTC >HINT:  Future log output will appear in directory "pg_log".
+featureserver    | 192.168.99.1 - - [04/Apr/2017 15:12:24] "GET / HTTP/1.1" 200 35
 ```
 
 ## TODO
@@ -59,7 +75,7 @@ featureserver    | 192.168.99.1 - - [03/Apr/2017 16:15:40] "GET / HTTP/1.1" 200 
 1. ~~Create a *docker-compose* file~~
 2. Test of *featureserver* features
   * ~~Start the featuresrever~~
-  * Connect the featureserver to postgis2
+  * ~~Connect the featureserver to postgis2~~
 3. Find a way to run it on *amazonlinux*
 4. Make the image smaller
 5. Refactor scripts in the data/ directory
